@@ -196,6 +196,11 @@ class LiteLLMEmbeddingEngine(EmbeddingEngine):
         # If model also contains provider information, extract only model information
         model = self.model.split("/")[-1]
 
+        tokenizer = TikTokenTokenizer(
+                    model=None, max_completion_tokens=self.max_completion_tokens
+                )
+        return tokenizer
+
         if "openai" in self.provider.lower():
             tokenizer = TikTokenTokenizer(
                 model=model, max_completion_tokens=self.max_completion_tokens
